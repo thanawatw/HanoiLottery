@@ -22,6 +22,7 @@ public class HanoiLotteryController {
     public String index(Model model) throws ParseException {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Optional<LotteryPrize> lpOpt = lotteryPrizeRepo.findByDrawDate(formatter.parse(formatter.format(new Date())));
+        model.addAttribute("today", new Date());
         model.addAttribute("todayLotteryPrize", lpOpt.isPresent() ? lpOpt.get() : new LotteryPrize());
         model.addAttribute("lotteryPrizes", lotteryPrizeRepo.findAll());
         return "index";
